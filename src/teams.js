@@ -8,7 +8,7 @@ export default [
     {
         name: 'Mercedes',
         textColor: '#06d1cd', // bright teal
-        raceColor: '#06d1cd', // off white
+        raceColor: '#afafaf', // silver
         bgColor: '#1b252e' // darkish greenblue
     },
     {
@@ -32,7 +32,7 @@ export default [
     {
     	name: 'Alpha Tauri',
     	textColor: '#FFFFFF', // white
-    	raceColor: 'silver', // silver
+    	raceColor: '#afafaf', // silver
     	bgColor: '#2B4562' // navy
     },
     {
@@ -50,7 +50,7 @@ export default [
     },
     {
     	name: 'Alfa Romeo',
-    	raceColor: '#900000', // red
+    	raceColor: '#1a212b', // dark navy
     	textColor: '#FFFFFF', // white
     	bgColor: '#900000' // red
     },

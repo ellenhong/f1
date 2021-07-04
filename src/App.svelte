@@ -7,7 +7,7 @@
     let date = new Date();
     $: epoch = date.getTime();
 
-    // filter races by those later than today's date & get the upcoming race
+    // get the upcoming race
     $: filteredRaces = races.filter(race => epoch < formatRaceDateTime(race));
     $: nextRace = filteredRaces[0];
     
@@ -53,7 +53,6 @@
     		raceTimeColor = selected.textColor;
     	}
     }
-
 </script>
 
 <main style="{cssVarStyles}">
@@ -70,14 +69,17 @@
         </form>
     </div>
 
-    <div class='card'></div>
-    <h1>next race in</h1>
+    <div class='outercard'>
+        <div class='card'></div>
+        <h1>next race in</h1>
 
-    <div class='clockWrapper'>
-        <p class='clockDisplay'> 
-            <span>{days}</span> DAYS <span class="clockDisplaySpan">{hours}</span>H <span class="clockDisplaySpan">{minutes}</span>M <span class="clockDisplaySpan">{seconds}</span>S
-        </p>
+        <div class='clockWrapper'>
+            <p class='clockDisplay'> 
+                <span>{days}</span> DAYS <span class="clockDisplaySpan">{hours}</span>H <span class="clockDisplaySpan">{minutes}</span>M <span class="clockDisplaySpan">{seconds}</span>S
+            </p>
+        </div>
     </div>
+    
     <div class='race'>
         <p class='nextRace'>{nextRace.name}</p>
         <!-- svelte-ignore a11y-missing-attribute -->
@@ -103,8 +105,8 @@
 
     main {
         text-align: center;
-        max-width: 240px;
         margin: 0 auto;
+        max-width: none;
     }
 
     .colorSelector {
@@ -116,7 +118,14 @@
         font-size: 1.5em;
         font-weight: 200;
         font-family: "IBM Plex Mono", monospace;
-        margin-top: 35px;
+        position: relative;
+        top: 35px;
+    }
+
+    .outercard {
+        height: 220px;
+        position: relative;
+        top: -20px;
     }
 
     .card {
@@ -128,14 +137,50 @@
         left: 50%;
         transform: translate(-50%);
         z-index: -1;
-        box-shadow: 5px 5px 20px #424242;
+        box-shadow: 5px 5px 0px var(--race-color, black);
         border-radius: 10px;
     }
 
-    @media (min-width: 640px) {
-        main {
-            max-width: none;
+    @media (max-width: 640px) {
+        .card {
+            width: 475px;
         }
+
+        h1 {
+            font-size: 1.2em;
+        }
+
+        .clockWrapper .clockDisplay {
+            font-size: 1.4em;
+            margin: 0;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .card {
+            width: 325px;
+        }
+
+        h1 {
+            font-size: 0.8em;
+        }
+
+        .clockWrapper .clockDisplay {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        p.clockDisplay {
+            max-width: 200px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+        }
+    }
+
+    .clockWrapper {
+        position: relative;
+        top: 35px;
     }
 
     p.clockDisplay {
@@ -162,6 +207,8 @@
         letter-spacing: 0.8px;
         font-weight: 600;
         color: var(--race-color, black);
+        position: relative;
+        top: -70px;
     }
 
     .race img {
@@ -184,7 +231,8 @@
 
     .raceTimes {
         width: 25em;
-        margin: 2em auto;
+        margin: 1em auto;
+        max-width: 100%;
     }
     
     .raceTimeCol {
