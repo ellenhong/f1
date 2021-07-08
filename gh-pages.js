@@ -1,7 +1,7 @@
 var ghpages = require('gh-pages');
 
 ghpages.publish(
-    'docs', // path to docs directory
+    'public', // path to public directory
     {
         branch: 'gh-pages',
         repo: 'https://github.com/ellehong/f1.git',  
